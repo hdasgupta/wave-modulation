@@ -22,7 +22,7 @@ class SineWave(val amplitude: Double, val angularMultiplier:Double,  val angular
         while (x<=X_MAX) {
 
             val sin = amplitude * sin(waveAngleStart)
-            val amp = sin/2 * AMPLITUDE_FRACTION + height/2
+            val amp = (sin-10) * AMPLITUDE_FRACTION + height/2
 
             values.lineTo(x, amp)
 
