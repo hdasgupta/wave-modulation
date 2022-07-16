@@ -2,6 +2,7 @@ package com.modulation.wave.Modulations.bo
 
 import java.awt.BasicStroke
 import java.awt.Color
+import java.awt.Font
 import java.awt.geom.Rectangle2D
 import java.awt.image.BufferedImage
 
@@ -23,7 +24,13 @@ class Imagilization(val width: Double, val height: Double) {
 
         graphics.drawLine(10, height.toInt()/2, width.toInt()-10, height.toInt()/2)
 
-        
+        graphics.color = Color.RED
+        graphics.font = graphics.font.deriveFont(Font.BOLD)
+
+        graphics.drawString(plots.maxHeight().toString(), 20, 20)
+
+        graphics.drawString("-" + plots.maxHeight().toString(), 20, height.toInt() - 40)
+
         return image
 
     }

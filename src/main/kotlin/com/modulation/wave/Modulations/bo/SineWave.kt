@@ -5,6 +5,8 @@ import kotlin.math.sin
 
 open abstract class Plots(val angularStep: Double) {
     abstract fun calculate(width: Double, height: Double): Path2D.Double
+
+    abstract fun maxHeight(): Double
 }
 
 class SineWave(val amplitude: Double, val angularMultiplier:Double,  val angularOffset: Double, angularStep: Double) : Plots(angularStep) {
@@ -33,6 +35,10 @@ class SineWave(val amplitude: Double, val angularMultiplier:Double,  val angular
         return values
     }
 
+    override fun maxHeight(): Double {
+        return amplitude
+    }
+
 }
 
 open abstract class Modulation(val wave1: SineWave, val wave2: SineWave, angularStep: Double) : Plots(angularStep){
@@ -42,7 +48,7 @@ open abstract class Modulation(val wave1: SineWave, val wave2: SineWave, angular
 class AmplitudeModulation(wave1: SineWave, wave2: SineWave, angularStep: Double) : Modulation(wave1, wave2, angularStep) {
     override fun calculate(width: Double, height: Double): Path2D.Double {
         val values = Path2D.Double()
-        val totalAmp = wave1.amplitude + wave2.amplitude
+        val totalAmp = maxHeight()
         val AMPLITUDE_FRACTION = (height - 30)/totalAmp
         val X_MIN = 10.0
         val X_MAX = width - 10
@@ -68,6 +74,10 @@ class AmplitudeModulation(wave1: SineWave, wave2: SineWave, angularStep: Double)
 
         return values
 
+    }
+
+    override fun maxHeight(): Double {
+        return wave1.amplitude + wave2.amplitude
     }
 
 
@@ -102,6 +112,10 @@ class FrequencyModulation(wave1: SineWave, wave2: SineWave, angularStep: Double)
 
         return values
 
+    }
+
+    override fun maxHeight(): Double {
+        return wave1.amplitude
     }
 }
 
