@@ -91,7 +91,7 @@ class FrequencyModulation(wave1: SineWave, wave2: SineWave, angularStep: Double)
 
             val sin2 = wave2.amplitude * sin(wave2AngleStart)
             val sin1 = wave1.amplitude * sin(wave1AngleStart * sin2)
-            val amp = (sin1-10) * AMPLITUDE_FRACTION + height/2
+            val amp = (sin1-10) * AMPLITUDE_FRACTION + height/2 + 5
 
             values.lineTo(x, amp)
 
