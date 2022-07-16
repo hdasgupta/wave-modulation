@@ -14,8 +14,9 @@
 	<name>Modulations</name>
 	<description>Demo of wave frequency and amplitude modulation</description>
 	<properties>
-		<java.version>17</java.version>
-		<kotlin.version>1.6.21</kotlin.version>
+		<java.runtime.version>1.8</java.runtime.version>
+		<java.version>1.8</java.version>
+		<kotlin.version>1.6.10</kotlin.version>
 	</properties>
 	<dependencies>
 		<dependency>
