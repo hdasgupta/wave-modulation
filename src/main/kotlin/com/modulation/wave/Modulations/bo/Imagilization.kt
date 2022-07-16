@@ -27,9 +27,9 @@ class Imagilization(val width: Double, val height: Double) {
         graphics.color = Color.RED
         graphics.font = graphics.font.deriveFont(Font.BOLD)
 
-        graphics.drawString(plots.maxHeight().toString(), 20, 20)
+        graphics.drawString(plots.maxHeight().toString(), 20, 40)
 
-        graphics.drawString("-" + plots.maxHeight().toString(), 20, height.toInt() - 40)
+        graphics.drawString("-" + plots.maxHeight().toString(), 20, height.toInt() - 10)
 
         return image
 
