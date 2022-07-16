@@ -24,3 +24,19 @@ class RestModulationDto(
     var width: Int,
     var height: Int
 )
+
+
+class RestModulationDownloadDto(
+    var amplitude1: Double,
+    var angularMultiplier1:Double,
+    var angularOffset1: Double,
+    var angularStep1: Double,
+    var amplitude2: Double,
+    var angularMultiplier2:Double,
+    var angularOffset2: Double,
+    var angularStep2: Double,
+    var angularStep: Double,
+    var type: Modulation,
+    var width: Int,
+    var height: Int
+)
