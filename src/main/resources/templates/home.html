@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Board</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function resize() {
+          const dim= Math.floor($(window).height() / 2)
+          $(".row").css("height", dim);
+          $(".btn").css("height", dim);
+        }
+
+        $(document).ready(function(){
+          resize()
+          $(window).resize(function() {
+              resize()
+          })
+        })
+    </script>
+    <style>
+        .btn {
+            text-align: center;
+            vertical-align: center;
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body style="height: 100%" class="h-100">
+<div class="container-fluid h-100">
+    <div class="row" >
+        <div class="col-xs-12 bg-gray h-100" style="text-align: center; padding:0; margin:0; white-space: normal;">
+            <form action="/ampl" method="post">
+                <button class="btn btn-primary btn-block" type="submit" style="white-space: normal;">
+                    Amplitude Modulation
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-xs-12 bg-gray h-100" style="text-align: center; padding:0; margin:0; white-space: normal;">
+            <form action="/freq" method="post">
+                <button class="btn btn-primary btn-block" type="submit" style="white-space: normal;">
+                    Frequency Modulation
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
