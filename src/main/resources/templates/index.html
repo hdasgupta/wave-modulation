@@ -119,8 +119,8 @@
                     </tr>
                     <tr>
                         <td colspan="6" style="padding:0; margin:0; white-space: normal;">
-                            <label for="wave1Zoom" class="form-label">Zoom In/Out</label>
-                            <input oninput="sineWave1()" type="range" class="form-range" min="0.0001" max="1" step="0.0001" value="0.1" id="wave1Zoom">
+                            <label for="wave1Zoom" class="form-label">Zoom In/Out (<span id="wave1ZoomValue">0.1</span>)</label>
+                            <input oninput="sineWave1(); $('#wave1ZoomValue').val(this.value);" type="range" class="form-range" min="0.0001" max="1" step="0.0001" value="0.1" id="wave1Zoom">
                         </td>
                     </tr>
                     <tr>
@@ -169,8 +169,8 @@
                     </tr>
                     <tr>
                         <td colspan="6" style="padding:0; margin:0; white-space: normal;">
-                            <label for="wave2Zoom" class="form-label">Zoom In/Out</label>
-                            <input oninput="sineWave2()" type="range" class="form-range" min="0.0001" max="1" step="0.0001" value="0.1" id="wave2Zoom">
+                            <label for="wave2Zoom" class="form-label">Zoom In/Out (<span id="wave2ZoomValue">0.1</span>)</label>
+                            <input oninput="sineWave2(); $('#wave2ZoomValue').val(this.value);" type="range" class="form-range" min="0.0001" max="1" step="0.0001" value="0.1" id="wave2Zoom">
                         </td>
                     </tr>
                     <tr>
@@ -218,8 +218,8 @@
                     </tr>
                     <tr>
                         <td colspan="6" style="padding:0; margin:0; white-space: normal;">
-                            <label for="modulationZoom" class="form-label">Zoom In/Out</label>
-                            <input oninput="modulation()" type="range" class="form-range" min="0.0001" max="1" step="0.0001" value="0.1" id="modulationZoom">
+                            <label for="modulationZoom" class="form-label">Zoom In/Out (<span id="modulationZoomValue">0.1</span>)</label>
+                            <input oninput="modulation(); $('#modulationZoomValue').val(this.value);" type="range" class="form-range" min="0.0001" max="1" step="0.0001" value="0.1" id="modulationZoom">
                         </td>
                     </tr>
                 </table>
