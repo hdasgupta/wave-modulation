@@ -93,7 +93,7 @@ class RestApis {
             else -> FrequencyModulation(sineWave1, sineWave2, restModulationDto.angularStep)
         }
 
-        val processor = Imagilization(restModulationDto.width.toDouble(), restModulationDto.height.toDouble())
+        val processor = Imagilization(10000.0, 750.0)
 
         val plots = mapOf(
             Pair("SineWave1", sineWave1),

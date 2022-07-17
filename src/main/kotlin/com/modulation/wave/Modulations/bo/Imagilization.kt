@@ -3,6 +3,7 @@ package com.modulation.wave.Modulations.bo
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Font
+import java.awt.RenderingHints
 import java.awt.geom.Rectangle2D
 import java.awt.image.BufferedImage
 
@@ -10,6 +11,13 @@ class Imagilization(val width: Double, val height: Double) {
     fun get(plots: Plots): BufferedImage {
         val image = BufferedImage(width.toInt(), height.toInt(), BufferedImage.TYPE_INT_ARGB)
         val graphics = image.createGraphics()
+
+        graphics.renderingHints[RenderingHints.KEY_RENDERING] = RenderingHints.VALUE_RENDER_QUALITY
+        graphics.renderingHints[RenderingHints.KEY_ANTIALIASING] = RenderingHints.VALUE_ANTIALIAS_ON
+        graphics.renderingHints[RenderingHints.KEY_TEXT_ANTIALIASING] = RenderingHints.VALUE_TEXT_ANTIALIAS_ON
+        graphics.renderingHints[RenderingHints.KEY_COLOR_RENDERING] = RenderingHints.VALUE_COLOR_RENDER_QUALITY
+        graphics.renderingHints[RenderingHints.KEY_STROKE_CONTROL] = RenderingHints.VALUE_STROKE_PURE
+        graphics.renderingHints[RenderingHints.KEY_DITHERING] = RenderingHints.VALUE_DITHER_ENABLE
 
         graphics.color = Color.BLACK
         graphics.stroke = BasicStroke(3.0f)
