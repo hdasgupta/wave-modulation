@@ -160,8 +160,11 @@
                         $("#angularMultiplier2").val(data.angularMultiplier2)
                         $("#angularOffset2").val(data.angularOffset2)
                         $("#angularStep2").val(data.angularStep2)
-                        $("#angularStep").val(data.angularStep)
+                        $("#modulationZoom").val(data.angularStep)
                         type = data.type
+                        window.history.pushState("", "", '/'+type);
+                        sineWave1()
+                        sineWave2()
                     },
                     error: function (error) {
                         // handle error
