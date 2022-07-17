@@ -10,6 +10,10 @@ open abstract class Plots(val angularStep: Double) {
 }
 
 class SineWave(val amplitude: Double, val angularMultiplier:Double,  val angularOffset: Double, angularStep: Double) : Plots(angularStep) {
+
+    constructor(): this(0.0, 0.0, 0.0, 0.0) {
+
+    }
     override fun calculate(width: Double, height: Double): Path2D.Double {
         val values = Path2D.Double()
         val AMPLITUDE_FRACTION = (height - 30)/amplitude
@@ -46,6 +50,8 @@ open abstract class Modulation(val wave1: SineWave, val wave2: SineWave, angular
 }
 
 class AmplitudeModulation(wave1: SineWave, wave2: SineWave, angularStep: Double) : Modulation(wave1, wave2, angularStep) {
+    constructor() : this(SineWave(), SineWave(), 0.0)
+
     override fun calculate(width: Double, height: Double): Path2D.Double {
         val values = Path2D.Double()
         val totalAmp = maxHeight()
@@ -84,6 +90,8 @@ class AmplitudeModulation(wave1: SineWave, wave2: SineWave, angularStep: Double)
 }
 
 class FrequencyModulation(wave1: SineWave, wave2: SineWave, angularStep: Double) : Modulation(wave1, wave2, angularStep) {
+    constructor() : this(SineWave(), SineWave(), 0.0)
+
     override fun calculate(width: Double, height: Double): Path2D.Double {
         val values = Path2D.Double()
         val totalAmp = wave1.amplitude + wave2.amplitude

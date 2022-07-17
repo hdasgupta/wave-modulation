@@ -1,5 +1,7 @@
 package com.modulation.wave.Modulations.controller.dto
 
+import com.modulation.wave.Modulations.bo.SineWave
+
 class RestSineDto(
     var amplitude: Double,
     var angularMultiplier:Double,
@@ -40,3 +42,17 @@ class RestModulationDownloadDto(
     var width: Int,
     var height: Int
 )
+
+class ModulationDto(
+    var type: String,
+    var angularStep: Double
+) {
+    constructor(): this("", 0.0)
+}
+class YmlDto (
+    var sineWave1: SineWave,
+    var sineWave2: SineWave,
+    var modulation: ModulationDto
+) {
+    constructor() : this(SineWave(), SineWave(), ModulationDto()) {}
+}

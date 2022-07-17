@@ -5,10 +5,11 @@
     <title>[[${name}]] Modulation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+    var type = "[[${type}]]"
         function resize() {
           const dimWidth= Math.floor($(window).width() - 10)
           const dimHeight= Math.floor($(window).height() / 2)
@@ -39,6 +40,7 @@
           resize()
           sineWave1()
           sineWave2()
+          uploadReady()
           $(window).resize(function() {
               resize()
               sineWave1()
@@ -67,7 +69,7 @@
                     +"&angularMultiplier2="+$("#wave2AngDelta").val()
                     +"&angularOffset2="+$("#wave2AngOff").val()
                     +"&angularStep="+$("#modulationZoom").val()
-                    +"&type="+"[[${type}]]"
+                    +"&type="+type
                     +"&width="+dimWidth
                     +"&height="+dimHeight)
         }
@@ -108,11 +110,81 @@
             $("#angularOffset2").val($("#wave2AngOff").val())
             $("#angularStep2").val($("#wave2Zoom").val())
             $("#angularStep").val($("#modulationZoom").val())
-            $("#modType").val("[[${type}]]")
+            $("#modType").val(type)
             $("#width").val(dimWidth)
             $("#height").val(dimHeight)
 
             return true
+        }
+
+        function uploadReady() {
+
+            var Upload = function (file) {
+                this.file = file;
+            };
+
+            Upload.prototype.getType = function() {
+                return this.file.type;
+            };
+            Upload.prototype.getSize = function() {
+                return this.file.size;
+            };
+            Upload.prototype.getName = function() {
+                return this.file.name;
+            };
+            Upload.prototype.doUpload = function () {
+                var that = this;
+                var formData = new FormData();
+
+                // add assoc key values, this will be posts values
+                formData.append("file", this.file, this.getName());
+                formData.append("upload_file", true);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/img/upload",
+                    xhr: function () {
+                        var myXhr = $.ajaxSettings.xhr();
+                        if (myXhr.upload) {
+                            myXhr.upload.addEventListener('progress', that.progressHandling, false);
+                        }
+                        return myXhr;
+                    },
+                    success: function (data) {
+                        console.log(data)
+                        $("#amplitude1").val(data.amplitude1)
+                        $("#angularMultiplier1").val(data.angularMultiplier1)
+                        $("#angularOffset1").val(data.angularOffset1)
+                        $("#angularStep1").val(data.angularStep1)
+                        $("#amplitude2").val(data.amplitude2)
+                        $("#angularMultiplier2").val(data.angularMultiplier2)
+                        $("#angularOffset2").val(data.angularOffset2)
+                        $("#angularStep2").val(data.angularStep2)
+                        $("#angularStep").val(data.angularStep)
+                        type = data.type
+                    },
+                    error: function (error) {
+                        // handle error
+                    },
+                    async: true,
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    timeout: 60000
+                });
+            };
+
+
+            $("#customFile").on("change", function (e) {
+                var file = $(this)[0].files[0];
+                var upload = new Upload(file);
+
+                // maby check size or type here with upload.getSize() and upload.getType()
+
+                // execute upload
+                upload.doUpload();
+            });
         }
     </script>
 </head>

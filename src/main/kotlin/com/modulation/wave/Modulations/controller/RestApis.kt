@@ -6,18 +6,19 @@ import com.modulation.wave.Modulations.bo.AmplitudeModulation
 import com.modulation.wave.Modulations.bo.FrequencyModulation
 import com.modulation.wave.Modulations.bo.Imagilization
 import com.modulation.wave.Modulations.bo.SineWave
-import com.modulation.wave.Modulations.controller.dto.Modulation
-import com.modulation.wave.Modulations.controller.dto.RestModulationDownloadDto
-import com.modulation.wave.Modulations.controller.dto.RestModulationDto
-import com.modulation.wave.Modulations.controller.dto.RestSineDto
+import com.modulation.wave.Modulations.controller.dto.*
 import org.springframework.stereotype.Controller
 import org.springframework.util.MimeTypeUtils
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.multipart.MultipartFile
+import java.io.BufferedInputStream
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import javax.imageio.ImageIO
@@ -163,6 +164,30 @@ class RestApis {
         out.close()
 
         return stream.toByteArray()
+
+    }
+
+    @PostMapping(value = ["/upload"], produces = [MimeTypeUtils.APPLICATION_JSON_VALUE])
+    fun upload(@RequestParam file:MultipartFile): RestModulationDownloadDto {
+        val input = BufferedInputStream(file.inputStream)
+        val om = ObjectMapper(YAMLFactory())
+
+        val obj = om.readValue(input.readBytes(), YmlDto::class.java)
+
+        return RestModulationDownloadDto(
+            obj.sineWave1.amplitude,
+            obj.sineWave1.angularMultiplier,
+            obj.sineWave1.angularOffset,
+            obj.sineWave1.angularStep,
+            obj.sineWave2.amplitude,
+            obj.sineWave2.angularMultiplier,
+            obj.sineWave2.angularOffset,
+            obj.sineWave2.angularStep,
+            obj.modulation.angularStep,
+            if(obj.modulation.type.equals("Amplitude")) Modulation.ampl else Modulation.freq,
+            0,
+            0
+        )
 
     }
 }
