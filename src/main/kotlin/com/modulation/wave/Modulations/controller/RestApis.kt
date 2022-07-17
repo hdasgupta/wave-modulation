@@ -184,7 +184,7 @@ class RestApis {
             obj.sineWave2.angularOffset,
             obj.sineWave2.angularStep,
             obj.modulation.angularStep,
-            if(obj.modulation.type.equals("Amplitude")) Modulation.ampl else Modulation.freq,
+            if(obj.modulation.type == "Amplitude") Modulation.ampl else Modulation.freq,
             0,
             0
         )
