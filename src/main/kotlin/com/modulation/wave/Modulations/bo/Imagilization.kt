@@ -19,7 +19,7 @@ class Imagilization(val width: Double, val height: Double) {
         graphics.renderingHints[RenderingHints.KEY_STROKE_CONTROL] = RenderingHints.VALUE_STROKE_PURE
         graphics.renderingHints[RenderingHints.KEY_DITHERING] = RenderingHints.VALUE_DITHER_ENABLE
 
-        graphics.color = Color.BLACK
+        graphics.color = Color.BLUE
         graphics.stroke = BasicStroke(3.0f)
         val path = plots.calculate(width, height)
         graphics.draw(path)
